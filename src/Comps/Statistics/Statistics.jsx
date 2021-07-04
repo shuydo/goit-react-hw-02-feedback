@@ -21,6 +21,16 @@ class Statistics extends React.Component {
     this.setState((pState) => ({ badValue: pState.badValue + 1 }));
   };
 
+  countTotalFeedback = () => {
+    return this.state.goodValue + this.state.neutralValue + this.state.badValue;
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    return this.state.goodValue
+      ? Math.round((this.state.goodValue / this.countTotalFeedback()) * 100)
+      : 0;
+  };
+
   render() {
     return (
       <div>
@@ -32,6 +42,8 @@ class Statistics extends React.Component {
         <p>Good: {this.state.goodValue}</p>
         <p>Neutral: {this.state.neutralValue}</p>
         <p>Bad: {this.state.badValue}</p>
+        <p>Total: {this.countTotalFeedback()}</p>
+        <p>Positive feedback: {this.countPositiveFeedbackPercentage()}%</p>
       </div>
     );
   }
